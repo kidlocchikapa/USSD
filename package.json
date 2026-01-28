@@ -1,0 +1,24 @@
+{
+  "name": "ussd-wallet",
+  "version": "1.0.0",
+  "description": "USSD Moyo Wallet Service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "ussd",
+    "wallet",
+    "airtime",
+    "data"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
