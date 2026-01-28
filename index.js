@@ -1,6 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+// AfricasTalking SDK
+const AfricasTalking = require('africastalking');
+
+// Initialize AfricasTalking
+const africastalking = new AfricasTalking({
+    apiKey: process.env.AFRICAS_TALKING_API_KEY,
+    username: process.env.AFRICAS_TALKING_USERNAME
+});
 
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
@@ -73,10 +83,17 @@ app.post('/ussd', (req, res) => {
     }
 
     // Send the response
+    res.set('Content-Type', 'text/plain');
     res.send(response);
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ status: 'OK', message: 'USSD Server is running' });
 });
 
 // Start the server
 app.listen(port, () => {
     console.log(`USSD Server is running on port ${port}`);
+    console.log(`Receiving USSD requests at POST /ussd`);
 });
